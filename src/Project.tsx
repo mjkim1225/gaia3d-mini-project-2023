@@ -3,12 +3,18 @@ import Header from './Header'
 import MapBox from './mapbox/MapBox'
 import DeckGLMap from './mapbox/DeckGLMap'
 
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+
 const Proejct = () => {
     return (
         <>
-            <Header />
-            {/* <MapBox /> */}
-            <DeckGLMap />
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route path="/mapbox-only" element={<MapBox />} />
+                    <Route path="/deckgl" element={<DeckGLMap />} />
+                </Routes>
+            </BrowserRouter>
         </>
     )
 }

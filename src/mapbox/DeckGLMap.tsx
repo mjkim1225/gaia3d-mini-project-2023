@@ -4,7 +4,7 @@ import DeckGL from '@deck.gl/react/typed'
 import { LineLayer } from '@deck.gl/layers/typed'
 import { type Layer } from '@deck.gl/core/typed'
 import { Map } from 'react-map-gl'
-import { CENTER } from './config'
+import { CENTER, MAP_CSS } from './config'
 
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoibWpraW05NTEyMjUiLCJhIjoiY2xld2NmeWZ0MjZ4MzN5cXJsdnB5eWZqNyJ9.NU7joAnvVgkDMnK_788xUQ'
@@ -16,6 +16,9 @@ const DeckGLMap = () => {
     ]
 
     const [layers, setLayers] = useState<[Layer]>()
+    const [zoom, setZoom] = useState<number>(CENTER.zoom)
+    const [lat, setLat] = useState<number>(CENTER.lat)
+    const [lon, setLon] = useState<number>(CENTER.lon)
 
     useEffect(() => {
         const layer: Layer = new LineLayer({ id: 'line-layer', data })
@@ -23,18 +26,17 @@ const DeckGLMap = () => {
     }, [])
 
     return (
-        <div style={{ height: '100px' }}>
+        <div style={MAP_CSS}>
             <DeckGL
                 initialViewState={{
-                    longitude: CENTER.lon,
-                    latitude: CENTER.lat,
-                    zoom: CENTER.zoom,
+                    longitude: lon,
+                    latitude: lat,
+                    zoom,
                     pitch: 0,
                     bearing: 0
                 }}
                 controller={true}
-                layers={layers}
-            >
+                layers={layers} >
                 <Map mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
                     mapStyle={'mapbox://styles/mapbox/streets-v9'}/>
                 {/* <MapBox /> */}

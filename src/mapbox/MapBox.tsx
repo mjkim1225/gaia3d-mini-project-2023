@@ -3,20 +3,20 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { CENTER, MAP_CONFIG } from './config'
+import { CENTER, MAP_CONFIG, MAP_CSS } from './config'
 
 const MapBox = () => {
-    const [zoomLevel, setZoomLevel] = useState<number>(4)
+    const [zoom, setZoom] = useState<number>(CENTER.zoom)
     const [lat, setLat] = useState<number>(CENTER.lat)
     const [lon, setLon] = useState<number>(CENTER.lon)
 
     return (
-        <div style={{ height: '300px' }}>
+        <div style={MAP_CSS}>
             <ReactMapGL
                 initialViewState={{
                     latitude: lat,
                     longitude: lon,
-                    zoom: zoomLevel
+                    zoom
                 }}
                 // style={{ width: '100%', height: '100%' }}
                 maxZoom={MAP_CONFIG.maxZoom}
