@@ -4,10 +4,9 @@ import DeckGL from '@deck.gl/react/typed'
 import { LineLayer } from '@deck.gl/layers/typed'
 import { type Layer } from '@deck.gl/core/typed'
 import { Map } from 'react-map-gl'
-import { CENTER, MAP_CSS } from './config'
+import { CENTER, MAP_CSS, MAPBOX_ACCESS_TOKEN } from './config'
 
 // Set your mapbox access token here
-const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoibWpraW05NTEyMjUiLCJhIjoiY2xld2NmeWZ0MjZ4MzN5cXJsdnB5eWZqNyJ9.NU7joAnvVgkDMnK_788xUQ'
 
 const DeckGLMap = () => {
     // Data to be used by the LineLayer

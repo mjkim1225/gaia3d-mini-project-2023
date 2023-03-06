@@ -3,7 +3,6 @@ export interface MapConfig {
     maxZoom: number
     minZoom: number
     style: string
-    accessToken: string
     title: string
     type?: string
 }

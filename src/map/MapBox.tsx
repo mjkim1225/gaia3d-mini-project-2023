@@ -3,7 +3,7 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { CENTER, MAP_CONFIG, MAP_CSS } from './config'
+import { CENTER, MAP_CONFIG, MAP_CSS, MAPBOX_ACCESS_TOKEN } from './config'
 
 const MapBox = () => {
     const [zoom, setZoom] = useState<number>(CENTER.zoom)
@@ -21,7 +21,7 @@ const MapBox = () => {
                 // style={{ width: '100%', height: '100%' }}
                 maxZoom={MAP_CONFIG.maxZoom}
                 minZoom={MAP_CONFIG.minZoom}
-                mapboxAccessToken={MAP_CONFIG.accessToken}
+                mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
                 mapStyle={MAP_CONFIG.style}
             >
                 {/* <NavigationControl /> */}

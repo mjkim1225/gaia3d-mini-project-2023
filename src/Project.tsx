@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
-import MapBox from './mapbox/MapBox'
-import DeckGLMap from './mapbox/DeckGLMap'
+import MapBox from './map/MapBox'
+import DeckGLMap from './map/DeckGLMap'
 
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 
