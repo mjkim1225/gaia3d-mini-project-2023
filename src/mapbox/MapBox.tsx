@@ -1,40 +1,17 @@
 import React, { useState } from 'react'
-import ReactMapGL, { type ViewState, NavigationControl, Marker } from 'react-map-gl'
-import { type MapConfig } from './types'
+import ReactMapGL, { Marker } from 'react-map-gl'
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'mapbox-gl/dist/mapbox-gl.css'
-
-const MAP_TOKEN: string = 'pk.eyJ1IjoibWpraW05NTEyMjUiLCJhIjoiY2xld2NmeWZ0MjZ4MzN5cXJsdnB5eWZqNyJ9.NU7joAnvVgkDMnK_788xUQ'
-
-const mapConfig: MapConfig = {
-    avatar: '',
-    maxZoom: 19,
-    minZoom: 1,
-    type: 'vector',
-    style: 'mapbox://styles/mapbox/streets-v9', // mapbox://styles/jasper8vercnocke/ckgj6jez2119s19mphno725x4',
-    accessToken: MAP_TOKEN,
-    title: 'GRB'
-}
-
-interface Location {
-    lat: number
-    lon: number
-}
+import { CENTER, MAP_CONFIG } from './config'
 
 const MapBox = () => {
     const [zoomLevel, setZoomLevel] = useState<number>(4)
-    const [latLon, setLatLon] = useState<Location>({
-        lat: 37,
-        lon: 126
-    })
-
-    const { lat, lon } = latLon
-    const SIZE = 20
-    const UNIT = 'px'
+    const [lat, setLat] = useState<number>(CENTER.lat)
+    const [lon, setLon] = useState<number>(CENTER.lon)
 
     return (
-        <div style={{ height: '500px' }}>
+        <div style={{ height: '300px' }}>
             <ReactMapGL
                 initialViewState={{
                     latitude: lat,
@@ -42,11 +19,10 @@ const MapBox = () => {
                     zoom: zoomLevel
                 }}
                 // style={{ width: '100%', height: '100%' }}
-                maxZoom={mapConfig.maxZoom}
-                minZoom={mapConfig.minZoom}
-                mapboxAccessToken={mapConfig.accessToken}
-                mapStyle={mapConfig.style}
-                // onViewportChange={onViewportChange}
+                maxZoom={MAP_CONFIG.maxZoom}
+                minZoom={MAP_CONFIG.minZoom}
+                mapboxAccessToken={MAP_CONFIG.accessToken}
+                mapStyle={MAP_CONFIG.style}
             >
                 {/* <NavigationControl /> */}
                 <Marker longitude={lon} latitude={lat} color="blue" />

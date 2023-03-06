@@ -10,5 +10,6 @@ export interface MapConfig {
 
 export interface Location {
     lat: number
-    lng: number
+    lon: number
+    zoom: number
 }
