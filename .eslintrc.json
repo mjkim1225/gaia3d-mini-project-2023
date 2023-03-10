@@ -21,7 +21,7 @@
         "@typescript-eslint" // for TS
     ],
     "rules": {
-        "indent": ["warn", 4],
+        "indent": ["warn", 4, { "SwitchCase": 1 }],
         "react/jsx-indent": ["warn", 4],
         "@typescript-eslint/indent": ["warn", 4], // for TS
         "comma-dangle": "off",
