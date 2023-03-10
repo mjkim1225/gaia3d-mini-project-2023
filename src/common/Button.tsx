@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 // style 안의 변수
 interface StyleTypes {
-    variant?: 'primary' | 'secondary'
+    variant?: 'primary' | 'secondary' | 'third'
 }
 
 // props 정의
@@ -13,16 +13,23 @@ interface ButtonTypes extends StyleTypes {
 }
 
 const ButtonStyle = styled.button<StyleTypes>`
-  padding: 12px 24px;
-  border: none;
-  outline: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  color: white;
+    margin: 5px;
+    border: 0;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    font-weight: 400;
+    box-shadow: none;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: .9375rem;
+    font-family: "Nunito",sans-serif;
+    border-radius: 4px;
+    box-shadow: none;
   background-color: ${({ variant }) =>
-        variant === 'primary' ? '#e8ae1b' : '#7d4b00'};
+        variant === 'primary'
+            ? '#00bebe'
+            : variant === 'secondary' ? '#7d4b00' : '#8400a8'};
 
   &:disabled {
     background: #e7e8e9;

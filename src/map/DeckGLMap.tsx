@@ -1,5 +1,5 @@
 /// app.js
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import DeckGL from '@deck.gl/react/typed'
 import { GeoJsonLayer, LineLayer } from '@deck.gl/layers/typed'
 import { type Layer } from '@deck.gl/core/typed'
@@ -50,9 +50,9 @@ const DeckGLMap = () => {
 
     return (
         <>
-            <Button title={'remove'} onClick={removeAllLayers} />
-            <Button title={'line'} onClick={addLineLayer} />
-            <Button title={'hospital'} onClick={addHospitalLayer} />
+            <Button title={'remove'} onClick={removeAllLayers} variant={'third'} />
+            <Button title={'line'} onClick={addLineLayer} variant={'third'} />
+            <Button title={'hospital'} onClick={addHospitalLayer} variant={'third'} />
             <div style={MAP_CSS}>
                 <DeckGL
                     initialViewState={{
