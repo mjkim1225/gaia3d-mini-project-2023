@@ -1,9 +1,11 @@
 /// app.js
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DeckGL from '@deck.gl/react/typed'
 import { GeoJsonLayer, LineLayer } from '@deck.gl/layers/typed'
 import { type Layer } from '@deck.gl/core/typed'
-import { Map } from 'react-map-gl'
+import { TerrainLayer, Tile3DLayer } from '@deck.gl/geo-layers/typed'
+
+import Map, { Source } from 'react-map-gl'
 import { CENTER, MAP_CSS, MAPBOX_ACCESS_TOKEN } from './config'
 import Button from '../common/Button'
 
@@ -17,6 +19,9 @@ const DeckGLMap = () => {
     const [zoom, setZoom] = useState<number>(CENTER.zoom)
     const [lat, setLat] = useState<number>(CENTER.lat)
     const [lon, setLon] = useState<number>(CENTER.lon)
+
+    useEffect(() => {
+    }, [])
 
     const removeAllLayers = () => {
         setLayers([])
@@ -62,6 +67,27 @@ const DeckGLMap = () => {
         addLayer(layer)
     }
 
+    const addTerrainData = () => {
+        const terrainLayer = new TerrainLayer({
+            elevationDecoder: {
+                rScaler: 6553.6,
+                gScaler: 25.6,
+                bScaler: 0.1,
+                offset: -10000
+            },
+            material: {
+                diffuse: 1
+            },
+            // elevationData: 'https://api.maptiler.com/tiles/terrain-rgb-v2/{z}/{x}/{y}.webp?key=JnUstpGHsGKv6aYoeuMe',
+            elevationData: `https://api.mapbox.com/v4/mapbox.terrain-rgb/{z}/{x}/{y}.png?access_token=${MAPBOX_ACCESS_TOKEN}`,
+            // elevationData: `http://localhost:8080/tiles/{z}/{x}/{y}.png`, // texture: 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            // texture: 'https://xdworld.vworld.kr/2d/gray/service/{z}/{x}/{y}.png',
+            texture: 'https://xdworld.vworld.kr/2d/Satellite/service/{z}/{x}/{y}.jpeg',
+            // texture: `http://175.197.92.213:10502/static/ujdataset/ujaerialimg/{z}/{x}/{y}.png`,
+        })
+        addLayer(terrainLayer)
+    }
+
     const addLayer = (layer: Layer) => {
         setLayers((prevLayer) => {
             return (prevLayer != null) ? [...prevLayer, layer] : [layer]
@@ -73,6 +99,8 @@ const DeckGLMap = () => {
             <Button title={'remove'} onClick={removeAllLayers} variant={'third'} />
             <Button title={'line'} onClick={addLineLayer} variant={'third'} />
             <Button title={'hospital'} onClick={addHospitalLayer} variant={'third'} />
+            <Button title={'3D'} onClick={add3Dtileset} variant={'third'} />
+            <Button title={'terrain'} onClick={addTerrainData} variant={'third'} />
             <div style={MAP_CSS}>
                 <DeckGL
                     initialViewState={{
@@ -85,8 +113,16 @@ const DeckGLMap = () => {
                     controller={true}
                     layers={layers} >
                     <Map mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
-                        mapStyle={'mapbox://styles/mapbox/streets-v9'}/>
-                    {/* <MapBox /> */}
+                        mapStyle={'mapbox://styles/mapbox/streets-v9'}
+                        attributionControl={false}
+                        terrain={{ source: 'mapbox-dem', exaggeration: 1.5 }}
+                    >
+                        {/* <Source */}
+                        {/*    id="mapbox-dem" */}
+                        {/*    type="raster-dem" */}
+                        {/*    url="http://localhost:8003/koreadem100/layer.json" */}
+                        {/* /> */}
+                    </Map>
                 </DeckGL>
             </div>
         </>
