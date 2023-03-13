@@ -23,11 +23,13 @@ const Contents = () => {
     return (
         <>
             <ContentsWrapper>
-                <Routes>
-                    <Route path="/mapbox-only" element={<MapBox />} />
-                    <Route path="/deckgl" element={<DeckGLMap />} />
-                    <Route path="/settings" element={<Settings />} />
-                </Routes>
+                <div>
+                    <Routes>
+                        <Route path="/mapbox-only" element={<MapBox />} />
+                        <Route path="/deckgl" element={<DeckGLMap />} />
+                        <Route path="/settings" element={<Settings />} />
+                    </Routes>
+                </div>
             </ContentsWrapper>
         </>
     )

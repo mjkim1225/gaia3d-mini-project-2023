@@ -29,7 +29,7 @@ const ButtonStyle = styled.button<StyleTypes>`
   background-color: ${({ variant }) =>
         variant === 'primary'
             ? '#00bebe'
-            : variant === 'secondary' ? '#7d4b00' : '#8400a8'};
+            : variant === 'secondary' ? '#02a3e3' : '#47f230'};
 
   &:disabled {
     background: #e7e8e9;

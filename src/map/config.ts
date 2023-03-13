@@ -19,6 +19,6 @@ export const CENTER: Location = {
 }
 export const MAP_CSS: React.CSSProperties = {
     position: 'relative',
-    height: '500px',
-    width: '800px'
+    height: '800px',
+    width: '1300px'
 }

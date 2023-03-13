@@ -31,10 +31,10 @@ const Header = () => {
                         <Button title={'mapbox only'} onClick={buttonEvent} />
                     </Link>
                     <Link to="/deckgl">
-                        <Button title={'deckgl with mapbox'} onClick={buttonEvent} variant={'secondary'} />
+                        <Button title={'deckgl with mapbox'} onClick={buttonEvent} />
                     </Link>
                     <Link to="/settings">
-                        <Button title={'환경 설정'} onClick={buttonEvent} variant={'third'} />
+                        <Button title={'환경 설정'} onClick={buttonEvent} variant={'secondary'} />
                     </Link>
                 </MenuWrapper>
             </HeaderWrapper>

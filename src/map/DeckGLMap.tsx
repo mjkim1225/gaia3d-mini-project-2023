@@ -42,6 +42,26 @@ const DeckGLMap = () => {
         addLayer(layer)
     }
 
+    const add3Dtileset = () => {
+        const layer = new Tile3DLayer({
+            id: 'tile-3d-layer',
+            data: 'http://localhost:8002/static/ws_output/tileset.json',
+            onTilesetLoad: (tileset: any) => {
+            // Recenter to cover the tileset
+                const { cartographicCenter, zoom } = tileset
+                setLat(cartographicCenter[1])
+                setLon(cartographicCenter[0])
+                const moreZoom: number = zoom
+                setZoom(moreZoom)
+            },
+            // override scenegraph subLayer prop
+            _subLayerProps: {
+                scenegraph: { _lighting: 'flat' }
+            }
+        })
+        addLayer(layer)
+    }
+
     const addLayer = (layer: Layer) => {
         setLayers((prevLayer) => {
             return (prevLayer != null) ? [...prevLayer, layer] : [layer]
