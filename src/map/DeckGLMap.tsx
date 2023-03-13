@@ -5,9 +5,10 @@ import { GeoJsonLayer, LineLayer } from '@deck.gl/layers/typed'
 import { type Layer } from '@deck.gl/core/typed'
 import { TerrainLayer, Tile3DLayer } from '@deck.gl/geo-layers/typed'
 
-import Map, { Source } from 'react-map-gl'
+import Map from 'react-map-gl'
 import { CENTER, MAP_CSS, MAPBOX_ACCESS_TOKEN } from './config'
 import Button from '../common/Button'
+import useMapStore from '../store/mapStore'
 
 const DeckGLMap = () => {
     // Data to be used by the LineLayer
@@ -15,7 +16,9 @@ const DeckGLMap = () => {
         { sourcePosition: [CENTER.lon, CENTER.lat], targetPosition: [CENTER.lon, CENTER.lat + 0.5] }
     ]
 
-    const [layers, setLayers] = useState<Layer[]>()
+    // zustand store!!!
+    const { layers, addLayer, removeAllLayers } = useMapStore()
+
     const [zoom, setZoom] = useState<number>(CENTER.zoom)
     const [lat, setLat] = useState<number>(CENTER.lat)
     const [lon, setLon] = useState<number>(CENTER.lon)
@@ -23,9 +26,6 @@ const DeckGLMap = () => {
     useEffect(() => {
     }, [])
 
-    const removeAllLayers = () => {
-        setLayers([])
-    }
     const addLineLayer = () => {
         const layer: Layer = new LineLayer({ id: 'line-layer', data })
         addLayer(layer)
@@ -88,12 +88,6 @@ const DeckGLMap = () => {
         addLayer(terrainLayer)
     }
 
-    const addLayer = (layer: Layer) => {
-        setLayers((prevLayer) => {
-            return (prevLayer != null) ? [...prevLayer, layer] : [layer]
-        })
-    }
-
     return (
         <>
             <Button title={'remove'} onClick={removeAllLayers} variant={'third'} />
@@ -117,11 +111,6 @@ const DeckGLMap = () => {
                         attributionControl={false}
                         terrain={{ source: 'mapbox-dem', exaggeration: 1.5 }}
                     >
-                        {/* <Source */}
-                        {/*    id="mapbox-dem" */}
-                        {/*    type="raster-dem" */}
-                        {/*    url="http://localhost:8003/koreadem100/layer.json" */}
-                        {/* /> */}
                     </Map>
                 </DeckGL>
             </div>
